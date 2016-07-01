@@ -93,30 +93,79 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <div class="row">
-            <div class="col-lg-12">
-                <fieldset> <!-- this is the search bar -->
-                    <div class="container">
-                        <div class="row">
-                            <h2> Search Artist </h2>
-                               <div id="custom-search-input">
-                                    <div class="input-group col-md-12">
-                                        <input type="text" class="  search-query form-control" placeholder="Search" />
-                                        <span class="input-group-btn">
-                                        <button class="btn btn-danger" type="button">
-                                        <span class=" glyphicon glyphicon-search"></span>
-                                        </button>
-                                        </span>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
+        <div class='row'>
+            <form id="searchForm">
+              <fieldset class="form-group">
+                <label for="exampleInputEmail1">Artist</label>
+                <input type="text" class="form-control" id="artistInput" placeholder="Artist">
+              </fieldset>
+              <fieldset class="form-group">
+                <label for="exampleInputPassword1">Zip Code</label>
+                <input type="text" class="form-control" id="zipInput" placeholder="ZIP">
+              </fieldset>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
         </div>
 
         <hr>
+
+           <!--  left table -->
+           <div class='row'>
+                <div class='col-md-6 col-sm-12'>
+                    <table class="table table-reflow concerts">
+                     <thead>
+                       <tr>
+                         <th>Concerts</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <th scope="row">1</th>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                       </tr>
+                     </tbody>
+                    </table>
+                </div>
+
+               <!--  right table -->
+                <div class='col-md-6 col-sm-12'>
+                    <table class="table table-reflow songs">
+                     <thead>
+                       <tr>
+                         <th>Songs</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                         <th>Table heading</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <th scope="row">1</th>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                         <td>Table cell</td>
+                       </tr>
+                     </tbody>
+                    </table>
+                </div>
+            </div>
 
         <!-- Footer -->
         <footer>
