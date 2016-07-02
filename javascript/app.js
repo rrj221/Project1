@@ -47,7 +47,7 @@ $('#searchForm').on('submit', function() {
 	}).done(function (response) {
 		console.log(response);
 		var eventsStuff = response._embedded;
-		$('#concertTableBody').empty();
+		$('#concertsTableBody').empty();
 		if (!eventsStuff) {
 			$('.concertsMessage').show().text('No concerts found');
 		} else {
@@ -107,7 +107,7 @@ function concertsTable (i, eventsArray) {
 	$('<td>').text(priceRange).appendTo(tableRow);
 	$('<td>').append(link).appendTo(tableRow);
 
-	tableRow.appendTo('#concertTableBody');
+	tableRow.appendTo('#concertsTableBody');
 }
 
 function formatTime(time) {
