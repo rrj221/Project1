@@ -21,6 +21,13 @@ firebase.auth().signInWithPopup(provider).then(function (result) {
 	var username = user.displayName;
 	console.log(username);
 	$('#userMessage').text("Welcome "+username+"!");
+
+	var userImgURL = user.photoURL;
+	$('<img>', {
+		url: userImgURL
+	}).appendTo($('#userImgDiv'));
+
+
 }).catch(function (error) {
 	//Handle Errors here.
 	var errorCode = error.code;
