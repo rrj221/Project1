@@ -13,6 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/latinopage.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/half-slider.css" rel="stylesheet">
@@ -31,25 +32,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Genres</a>
+                <a class="navbar-brand" href="../homepage/index.html">Genres</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Hip-Hop</a>
+                        <a href="../hiphoppage/index.html">Hip-Hop</a>
                     </li>
                     <li>
-                        <a href="#">Latino</a>
+                        <a href="../latinopage/index.html">Latino</a>
                     </li>
                     <li>
-                        <a href="#">Rock/Alternative</a>
+                        <a href="../rockpage/index.html">Rock/Alternative</a>
                     </li>
                     <li>
-                        <a href="#">Pop</a>
+                        <a href="../poppage/index.html">Pop</a>
                     </li>
                     <li>
-                        <a href="#">Electronic/House</a>
+                        <a href="../electronicpage/index.html">Electronic/House</a>
                     </li>
                    
                 </ul>
@@ -71,12 +72,12 @@
         <div class="carousel-inner">
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('https://gotthathiphop.files.wordpress.com/2013/03/cropped-new-gthh-banner1.jpg');"></div>
+                <div class="fill" style="background-image:url('http://artistikaa.com/wp-content/uploads/2014/11/romeo-slider_banner.jpg');"></div>
                 <div class="carousel-caption"> </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://site.focus.org/assets/images/blog/post-image/lecrae-banner.jpg');"></div>
+                <div class="fill" style="background-image:url('http://www.balajeeacademy.com/courses/images/banner-salsa-dance-basic.jpg');"></div>
                 <div class="carousel-caption"> </div>
             </div>
         </div>
@@ -92,37 +93,69 @@
     </header>
 
     <!-- Page Content -->
+    <br>
     <div class="container">
-
-        <div class="row">
-            <div class="col-lg-12">
-                <fieldset> <!-- this is the search bar -->
-                    <div class="container">
-                        <div class="row">
-                            <h2> Search Artist </h2>
-                               <div id="custom-search-input">
-                                    <div class="input-group col-md-12">
-                                        <input type="text" class="  search-query form-control" placeholder="Search" />
-                                        <span class="input-group-btn">
-                                        <button class="btn btn-danger" type="button">
-                                        <span class=" glyphicon glyphicon-search"></span>
-                                        </button>
-                                        </span>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
+        <div class='row'>
+            <form id="searchForm">
+              <fieldset class="form-group">
+                <label for="exampleInputEmail1">Artist</label>
+                <input type="text" class="form-control" id="artistInput" placeholder="Artist">
+              </fieldset>
+              <fieldset class="form-group">
+                <label for="exampleInputPassword1">Zip Code</label>
+                <input type="text" class="form-control" id="zipInput" placeholder="ZIP">
+              </fieldset>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
         </div>
 
         <hr>
+
+           <!--  left table -->
+           <div class='row'>
+                <div class='col-md-6 col-sm-12'>
+                    <div class='concertsMessage'></div>
+                    <table class="table table-reflow concerts">
+                     <thead>
+                       <tr>
+                         <th>Concerts</th>
+                         <th>Date</th>
+                         <th>Time</th>
+                         <th>Name</th>
+                         <th>Price Range</th>
+                         <th>Find Tickets</th>
+                       </tr>
+                     </thead>
+                     <tbody id='concertsTableBody'>
+
+                     </tbody>
+                    </table>
+                </div>
+
+               <!--  right table -->
+                <div class='col-md-6 col-sm-12'>
+                    <div class='songsMessage'></div>
+                    <table class="table table-reflow songs">
+                     <thead>
+                       <tr>
+                         <th>Songs</th>
+                         <th>Name</th>
+                         <th>Album</th>
+                         <th>Preview</th>
+                       </tr>
+                     </thead>
+                     <tbody id='songsTableBody'>
+
+                     </tbody>
+                    </table>
+                </div>
+            </div>
 
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; TicketFINDER 2016</p>
+                    <p>Copyright &copy; TicketFinder 2016</p>
                 </div>
             </div>
             <!-- /.row -->
@@ -145,8 +178,8 @@
     </script>
 
     <script src="../javascript/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 
 </body>
 
 </html>
-

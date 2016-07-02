@@ -13,6 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/hiphoppage.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/half-slider.css" rel="stylesheet">
@@ -31,25 +32,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Genres</a>
+                <a class="navbar-brand" href="../homepage/index.html">Genres</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Hip-Hop</a>
+                        <a href="../hiphoppage/index.html">Hip-Hop</a>
                     </li>
                     <li>
-                        <a href="#">Latino</a>
+                        <a href="../latinopage/index.html">Latino</a>
                     </li>
                     <li>
-                        <a href="#">Rock/Alternative</a>
+                        <a href="../rockpage/index.html">Rock/Alternative</a>
                     </li>
                     <li>
-                        <a href="#">Pop</a>
+                        <a href="../poppage/index.html">Pop</a>
                     </li>
                     <li>
-                        <a href="#">Electronic/House</a>
+                        <a href="../electronicpage/index.html">Electronic/House</a>
                     </li>
                    
                 </ul>
@@ -92,6 +93,7 @@
     </header>
 
     <!-- Page Content -->
+    <br>
     <div class="container">
         <div class='row'>
             <form id="searchForm">
@@ -112,56 +114,38 @@
            <!--  left table -->
            <div class='row'>
                 <div class='col-md-6 col-sm-12'>
+                    <div class='concertsMessage'></div>
                     <table class="table table-reflow concerts">
                      <thead>
                        <tr>
                          <th>Concerts</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
+                         <th>Date</th>
+                         <th>Time</th>
+                         <th>Name</th>
+                         <th>Price Range</th>
+                         <th>Find Tickets</th>
                        </tr>
                      </thead>
-                     <tbody>
-                       <tr>
-                         <th scope="row">1</th>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                       </tr>
+                     <tbody id='concertsTableBody'>
+
                      </tbody>
                     </table>
                 </div>
 
                <!--  right table -->
                 <div class='col-md-6 col-sm-12'>
+                    <div class='songsMessage'></div>
                     <table class="table table-reflow songs">
                      <thead>
                        <tr>
                          <th>Songs</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
-                         <th>Table heading</th>
+                         <th>Name</th>
+                         <th>Album</th>
+                         <th>Preview</th>
                        </tr>
                      </thead>
-                     <tbody>
-                       <tr>
-                         <th scope="row">1</th>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                         <td>Table cell</td>
-                       </tr>
+                     <tbody id='songsTableBody'>
+
                      </tbody>
                     </table>
                 </div>
@@ -171,7 +155,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; TicketFINDER 2016</p>
+                    <p>Copyright &copy; TicketFinder 2016</p>
                 </div>
             </div>
             <!-- /.row -->
@@ -194,6 +178,7 @@
     </script>
 
     <script src="../javascript/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 
 </body>
 
