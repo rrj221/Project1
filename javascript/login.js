@@ -24,7 +24,7 @@ firebase.auth().signInWithPopup(provider).then(function (result) {
 
 	var userImgURL = user.photoURL;
 	$('<img>', {
-		url: userImgURL
+		src: userImgURL
 	}).appendTo($('#userImgDiv'));
 
 
