@@ -32,6 +32,13 @@ $('#searchForm').on('submit', function() {
 		}
 	});
 
+	if (zipCode.length != 5) {
+		$('.concertsMessage').show().text('please enter a 5 digit zip code');
+		emptyInputs();
+		return false;
+	}
+
+
 	var ticketMasterKey = 'MNvdxNymEMKGoJIBvSRWhYxz602IGIZB'
 	var tmUrl = 	'https://app.ticketmaster.com/discovery/v2/events.json?'
 				+'classificationName=music&'+
@@ -65,7 +72,7 @@ $('#searchForm').on('submit', function() {
 		}
 	});
 
-
+	emptyInputs();
 	return false;
 });
 
@@ -154,4 +161,9 @@ function songsTable(i, songsDataArray) {
 	$('<td>').append(link).appendTo(tableRow);
 
 	tableRow.appendTo($('#songsTableBody'));
+}
+
+function emptyInputs() {
+	$('#artistInput').val('');
+	$('#zipInput').val('');
 }
