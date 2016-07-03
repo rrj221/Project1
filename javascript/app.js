@@ -1,12 +1,40 @@
+var addToFB = true;
+var searchCount = 0;
+var recentSearchesHidden = true;
+
+$('.recentSearchesArea').hide();
+
+var config = {
+	apiKey: "AIzaSyDI3iY0pqME0WKatwGYdSINUWejRu1YSjM",
+	authDomain: "project-8743018060077641250.firebaseapp.com",
+	databaseURL: "https://project-8743018060077641250.firebaseio.com",
+	storageBucket: "project-8743018060077641250.appspot.com",
+	};
+firebase.initializeApp(config);
+
+//create ref to database
+var dbRef = firebase.database().ref();
 	
 $('#searchForm').on('submit', function() {
 
 	var searchTerm = $('#artistInput').val();
 	var zipCode = $('#zipInput').val();
 
+	if (addToFB) {
+		recentSearchesToFB(searchTerm, zipCode);
+	}
+
+	$('#songsTableBody').empty();
+	$('#concertsTableBody').empty();
+
 	//hide message Div
 	$('.concertsMessage').hide();
 	$('.songsMessage').hide();
+
+	if (searchTerm === '') {
+		$('.songsMessage').show().text('Please type in an artist');
+		emptyInputs();
+	}
 
 	//API call to Deezer
 	$.ajax({
@@ -18,7 +46,6 @@ $('#searchForm').on('submit', function() {
 	}).done(function (response) {
 		console.log(response);
 		var songsDataArray = response.data;
-		$('#songsTableBody').empty();
 		if (songsDataArray.length === 0) {
 			$('.songsMessage').show().text('No songs found');
 		} else if (songsDataArray.length <= 5) {
@@ -40,8 +67,8 @@ $('#searchForm').on('submit', function() {
 
 
 	var ticketMasterKey = 'MNvdxNymEMKGoJIBvSRWhYxz602IGIZB'
-	var tmUrl = 	'https://app.ticketmaster.com/discovery/v2/events.json?'
-				+'classificationName=music&'+
+	var tmUrl = 'https://app.ticketmaster.com/discovery/v2/events.json?'+
+				'classificationName=music&'+
 				'keyword='+searchTerm+'&'+
 				'apikey='+ticketMasterKey+'&'+
 				'postalCode='+zipCode+'&'+
@@ -54,7 +81,6 @@ $('#searchForm').on('submit', function() {
 	}).done(function (response) {
 		console.log(response);
 		var eventsStuff = response._embedded;
-		$('#concertsTableBody').empty();
 		if (!eventsStuff) {
 			$('.concertsMessage').show().text('No concerts found');
 		} else {
@@ -115,7 +141,7 @@ function concertsTable (i, eventsArray) {
 	$('<td>').append(link).appendTo(tableRow);
 
 	tableRow.appendTo('#concertsTableBody');
-}
+};
 
 function formatTime(time) {
 
@@ -134,7 +160,7 @@ function formatTime(time) {
 	timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
 
 	return timeValue;
-}
+};
 
 
 function songsTable(i, songsDataArray) {
@@ -161,9 +187,92 @@ function songsTable(i, songsDataArray) {
 	$('<td>').append(link).appendTo(tableRow);
 
 	tableRow.appendTo($('#songsTableBody'));
-}
+};
 
 function emptyInputs() {
 	$('#artistInput').val('');
 	$('#zipInput').val('');
-}
+};
+
+function recentSearchesToFB(searchTerm, zipCode) {
+	var newSearch = {
+		searchTerm: searchTerm,
+		zipCode: zipCode
+	};
+
+	dbRef.push(newSearch);
+};
+
+var searchCounter = 1;
+dbRef.on('child_added', function (snapshot) {
+	console.log(snapshot.val());
+	console.log(snapshot.key);
+	var searchTerm = snapshot.val().searchTerm;
+	var zipCode = snapshot.val().zipCode;
+
+	var searchAgainButton = $('<button>', {
+		class: 'btn btn-primary searchAgain', 
+		text: 'Search Again',
+		'data-artist': searchTerm,
+		'data-zip': zipCode,
+	});
+
+	var key = snapshot.key;
+	var deleteButton = $('<button>', {
+		class: 'btn btn-danger deleteButton',
+		text: 'x',
+		'data-id': searchCount,
+		'data-key': key
+	});
+
+	// while(searchCounter < 5) {
+		var tableRow = $('<tr>', {
+			class: 'recentSearchRow',
+			'data-id': searchCount
+		});
+		$('<td>').text(searchTerm).appendTo(tableRow);
+		$('<td>').text(zipCode).appendTo(tableRow);
+		$('<td>').append(searchAgainButton).appendTo(tableRow);
+		$('<td>').append(deleteButton).appendTo(tableRow);
+
+		tableRow.prependTo($('#recentSearchesTableBody'));
+
+		deleteFifthRow();
+
+		searchCounter++;
+		searchCount++;
+	// }
+});
+
+$('#recentSearchesTableBody').on('click', '.searchAgain', function() {
+	$('#artistInput').val($(this).data('artist'));
+	$('#zipInput').val($(this).data('zip'));
+	addToFB = false;
+	$('#searchForm').trigger('submit');
+	addToFB = true;
+});
+
+$('#recentSearchesTableBody').on('click', '.deleteButton', function() {
+	$(this).closest('tr').remove();
+});	
+
+function deleteFifthRow() {
+	$('#recentSearchesTableBody tr').each(function() {
+		// console.log($(this).context.dataset.id);
+		var id = $(this).context.dataset.id;
+		if (id < searchCount - 4) {
+			$(this).remove();
+		}
+
+	});
+};
+
+$('.recentSearchesButton').on('click', function () {
+	if (recentSearchesHidden) {
+		$('.recentSearchesArea').show();
+		recentSearchesHidden = false;
+	} else {
+		$('.recentSearchesArea').hide();
+		recentSearchesHidden = true;
+	}
+});
