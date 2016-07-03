@@ -17,6 +17,9 @@
 
     <!-- Custom CSS -->
     <link href="css/half-slider.css" rel="stylesheet">
+
+    <!-- my css -->
+    <link href="../css/genre-pages.css" rel="stylesheet">    
 </head>
 
 <body>
@@ -97,16 +100,37 @@
     <div class="container">
         <div class='row'>
             <form id="searchForm">
-              <fieldset class="form-group">
-                <label for="exampleInputEmail1">Artist</label>
-                <input type="text" class="form-control" id="artistInput" placeholder="Artist">
-              </fieldset>
-              <fieldset class="form-group">
-                <label for="exampleInputPassword1">Zip Code</label>
-                <input type="number" class="form-control" id="zipInput" placeholder="ZIP">
-              </fieldset>
-              <button type="submit" class="btn btn-primary">Search</button>
+                <fieldset class="form-group">
+                    <label for="exampleInputEmail1">Artist</label>
+                    <input type="text" class="form-control" id="artistInput" placeholder="Artist">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="exampleInputPassword1">Zip Code</label>
+                    <input type="number" class="form-control" id="zipInput" placeholder="ZIP">
+                </fieldset>
+                <button type="submit" class="btn btn-primary searchButton">Search</button>
+                <button type="button" class="btn btn-success recentSearchesButton" data-toggle="button" aria-pressed="false" autocomplete="off">
+                    Recent Searches
+                </button>
             </form>
+        </div>
+
+        <!-- recent searches table -->
+        <div class='row recentSearchesArea'>
+            <div class='col-md-6 col-sm-12'>
+                <table class="table table-reflow concerts">
+                    <thead>
+                        <tr>
+                            <th>Artist</th>
+                            <th>Zip Code</th>
+                            <th>Search Again</th>
+                        </tr>
+                    </thead>
+                    <tbody id='recentSearchesTableBody'>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <hr>
@@ -176,6 +200,9 @@
         interval: 4000 //changes the speed
     })
     </script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
 
     <script src="../javascript/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
