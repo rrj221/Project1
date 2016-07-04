@@ -1,5 +1,3 @@
-var userIsLoggedIn = false;
-
 var config = {
 	apiKey: "AIzaSyDI3iY0pqME0WKatwGYdSINUWejRu1YSjM",
 	authDomain: "project-8743018060077641250.firebaseapp.com",
@@ -13,10 +11,15 @@ var provider = new firebase.auth.GoogleAuthProvider();
 
 console.log(provider);
 
+fillInButtonOnRefresh();
+
 $('.loginButton').on('click', function () {
-	if (!userIsLoggedIn) {
+	var user = firebase.auth().currentUser;
+	if (!user) {
+		alert('login');
 		login();
 	} else {
+		alert('logout');
 		logout();
 	}
 });
@@ -39,7 +42,7 @@ function login() {
 			src: userImgURL
 		}).appendTo($('#userImgDiv'));
 
-		$('.loginButton').text('Logout');
+		// $('.loginButton').text('Logout');
 		userIsLoggedIn = true;
 	}).catch(function (error) {
 		//Handle Errors here.
@@ -62,4 +65,23 @@ function logout() {
 	}, function(error) {
 		console.log(error);
 	});
+};
+
+firebase.auth().onAuthStateChanged(function(user) {
+	if (user) {
+		//User is signed in
+		$('.loginButton').text('Logout');
+	} else {
+		//No user is signed in
+		$('.loginButton').text('Login With Google');
+	}
+});
+
+function fillInButtonOnRefresh () {
+	var user = firebase.auth().currentUser;
+	if (!user) {
+		$('.loginButton').text('Login With Google');
+	} else {
+		$('.loginButton').text('Logout');
+	}
 };
