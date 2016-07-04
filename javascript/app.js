@@ -203,7 +203,6 @@ function recentSearchesToFB(searchTerm, zipCode) {
 	dbRef.push(newSearch);
 };
 
-var searchCounter = 1;
 dbRef.on('child_added', function (snapshot) {
 	console.log(snapshot.val());
 	console.log(snapshot.key);
@@ -225,23 +224,19 @@ dbRef.on('child_added', function (snapshot) {
 		'data-key': key
 	});
 
-	// while(searchCounter < 5) {
-		var tableRow = $('<tr>', {
-			class: 'recentSearchRow',
-			'data-id': searchCount
-		});
-		$('<td>').text(searchTerm).appendTo(tableRow);
-		$('<td>').text(zipCode).appendTo(tableRow);
-		$('<td>').append(searchAgainButton).appendTo(tableRow);
-		$('<td>').append(deleteButton).appendTo(tableRow);
+	var tableRow = $('<tr>', {
+		class: 'recentSearchRow',
+		'data-id': searchCount
+	});
+	$('<td>').text(searchTerm).appendTo(tableRow);
+	$('<td>').text(zipCode).appendTo(tableRow);
+	$('<td>').append(searchAgainButton).appendTo(tableRow);
+	$('<td>').append(deleteButton).appendTo(tableRow);
 
-		tableRow.prependTo($('#recentSearchesTableBody'));
+	tableRow.prependTo($('#recentSearchesTableBody'));
 
-		deleteFifthRow();
-
-		searchCounter++;
-		searchCount++;
-	// }
+	deleteFifthRow();
+	searchCount++;
 });
 
 $('#recentSearchesTableBody').on('click', '.searchAgain', function() {
@@ -254,6 +249,8 @@ $('#recentSearchesTableBody').on('click', '.searchAgain', function() {
 
 $('#recentSearchesTableBody').on('click', '.deleteButton', function() {
 	$(this).closest('tr').remove();
+	var key = $(this).context.dataset.key;
+	dbRef.child(key).remove();
 });	
 
 function deleteFifthRow() {
