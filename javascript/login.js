@@ -9,8 +9,6 @@ firebase.initializeApp(config);
 //create an instance of Google provider object
 var provider = new firebase.auth.GoogleAuthProvider();
 
-console.log(provider);
-
 fillInButtonOnRefresh();
 
 $('.loginButton').on('click', function () {
@@ -27,12 +25,10 @@ function login() {
 	//sign in with popup
 	firebase.auth().signInWithPopup(provider).then(function (result) {
 		//This gives you a Google Access Token.
-		console.log(result);
 		var token = result.credential.accessToken;
 		//The signed-in user info
 		var user = result.user;
 		var username = user.displayName;
-		console.log(username);
 		$('#userMessage').text("Welcome "+username+"!");
 
 		appendPhoto(user);
@@ -66,14 +62,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
 		//User is signed in
 		$('.loginButton').text('Logout');
-		alert('hi');
-		console.log(user);
-		console.log(user.photoURL);
-		console.log(user.displayName);
 		appendPhoto(user);
-		alert('photo');
 		$('#userMessage').text("Welcome "+user.displayName+"!");
-		alert('message');
 	} else {
 		//No user is signed in
 		$('.loginButton').text('Login With Google');
@@ -86,14 +76,8 @@ function fillInButtonOnRefresh () {
 		$('.loginButton').text('Login With Google');
 	} else {
 		$('.loginButton').text('Logout');
-		alert('hi');
-		console.log(user);
-		console.log(user.photoURL);
-		console.log(user.displayName);
 		appendPhoto(user);
-		alert('photo');
 		$('#userMessage').text("Welcome "+user.displayName+"!");
-		alert('message');
 	}
 };
 
