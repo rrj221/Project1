@@ -109,10 +109,14 @@ function concertsTable (i, eventsArray) {
 	console.log(time);
 	var name = eventsArray[i].name;
 	console.log(name);
-	var priceMin = eventsArray[i].priceRanges[0].min;
-	console.log(priceMin);
-	var priceMax = eventsArray[i].priceRanges[0].max;
-	console.log(priceMax);	
+	var priceMin = false;
+	var priceMax = false;
+	if (eventsArray[i].priceRanges) {
+		priceMin = eventsArray[i].priceRanges[0].min;
+		console.log(priceMin);
+		priceMax = eventsArray[i].priceRanges[0].max;
+		console.log(priceMax);	
+	}
 	var ticketsUrl = eventsArray[i].url;
 	console.log(ticketsUrl);
 
@@ -122,7 +126,11 @@ function concertsTable (i, eventsArray) {
 	var formattedTime = formatTime(time);
 	console.log(formattedTime);
 
-	var priceRange = "$"+priceMin+" - $"+priceMax;
+	var priceRange = false;
+	if (priceMin && priceMax) {
+		var priceRange = "$"+priceMin+" - $"+priceMax;
+	}
+
 	var link = $('<a>', {
 		href: ticketsUrl,
 		target: "_blank",
@@ -134,14 +142,22 @@ function concertsTable (i, eventsArray) {
 		scope: 'row', 
 		text: i + 1
 	}).appendTo(tableRow);
-	$('<td>').text(formattedDate).appendTo(tableRow);
-	$('<td>').text(formattedTime).appendTo(tableRow);
-	$('<td>').text(name).appendTo(tableRow);
-	$('<td>').text(priceRange).appendTo(tableRow);
+	appendIfFound(formattedTime, tableRow);
+	appendIfFound(formattedDate, tableRow);
+	appendIfFound(name, tableRow);
+	appendIfFound(priceRange, tableRow);
 	$('<td>').append(link).appendTo(tableRow);
 
 	tableRow.appendTo('#concertsTableBody');
 };
+
+function appendIfFound(thingToAppend, tableRow) {
+	if (thingToAppend !== false) {
+		$('<td>').text(thingToAppend).appendTo(tableRow);
+	} else {
+		$('<td>').text('N/A').appendTo(tableRow);
+	}
+}
 
 function formatTime(time) {
 
