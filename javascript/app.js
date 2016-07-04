@@ -49,7 +49,6 @@ $('#searchForm').on('submit', function() {
 		if (songsDataArray.length === 0) {
 			$('.songsMessage').show().text('No songs found');
 		} else if (songsDataArray.length <= 5) {
-			for (var i = 0; i < eventsArray.length; i++) {
 				songsTable(i, songsDataArray);
 			}
 		} else if (songsDataArray.length > 5) {
