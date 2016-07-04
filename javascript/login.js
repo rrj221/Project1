@@ -57,7 +57,7 @@ function logout() {
 	firebase.auth().signOut().then(function() {
 		$('#userMessage').text('');
 		$('#userImgDiv').empty();
-		$('loginButton').text('Login With Google');
+		$('.loginButton').text('Login With Google');
 		userIsLoggedIn = false;
 	}, function(error) {
 		console.log(error);
