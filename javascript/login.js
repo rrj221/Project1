@@ -31,7 +31,7 @@ function login() {
 		var username = user.displayName;
 		$('#userMessage').text("Welcome "+username+"!");
 
-		appendPhoto(user);
+		// appendPhoto(user);
 
 		// $('.loginButton').text('Logout');
 		userIsLoggedIn = true;
