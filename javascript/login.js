@@ -37,10 +37,7 @@ function login() {
 		console.log(username);
 		$('#userMessage').text("Welcome "+username+"!");
 
-		var userImgURL = user.photoURL;
-		$('<img>', {
-			src: userImgURL
-		}).appendTo($('#userImgDiv'));
+		appendPhoto(user);
 
 		// $('.loginButton').text('Logout');
 		userIsLoggedIn = true;
@@ -83,5 +80,14 @@ function fillInButtonOnRefresh () {
 		$('.loginButton').text('Login With Google');
 	} else {
 		$('.loginButton').text('Logout');
+		appendPhoto(user);
+		$('#userMessage').text("Welcome "+user.displayName+"!");
 	}
+};
+
+function appendPhoto(userData) {
+	var userImgURL = userData.photoURL;
+	$('<img>', {
+		src: userImgURL
+	}).appendTo($('#userImgDiv'));
 };
