@@ -16,10 +16,8 @@ fillInButtonOnRefresh();
 $('.loginButton').on('click', function () {
 	var user = firebase.auth().currentUser;
 	if (!user) {
-		alert('login');
 		login();
 	} else {
-		alert('logout');
 		logout();
 	}
 });
@@ -80,8 +78,14 @@ function fillInButtonOnRefresh () {
 		$('.loginButton').text('Login With Google');
 	} else {
 		$('.loginButton').text('Logout');
+		alert('hi');
+		console.log(user);
+		console.log(user.photoURL);
+		console.log(user.displayName);
 		appendPhoto(user);
+		alert('photo');
 		$('#userMessage').text("Welcome "+user.displayName+"!");
+		alert('message');
 	}
 };
 
